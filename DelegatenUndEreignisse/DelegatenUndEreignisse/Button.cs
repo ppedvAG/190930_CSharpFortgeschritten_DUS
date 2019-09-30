@@ -8,7 +8,26 @@ namespace DelegatenUndEreignisse
 {
     class Button
     {
-        public Action KlickLogik; // hier kann ich Speichern(); Abbrechen();
+        // Variante "Lang"
+
+        //private Action klickLogik; // hier kann ich Speichern(); Abbrechen();
+        //public event Action KlickLogik
+        //{
+        //    add
+        //    {
+        //        klickLogik += value;
+        //    }
+        //    remove
+        //    {
+        //        klickLogik -= value;
+        //    }
+        //}
+
+        // Variante "Kurz"
+        public event Action KlickLogik;
+        // Der Compiler macht aus der Variante "Kurz" die lange Variante
+
+        public event EventHandler Click;
 
         public void MachDenKlick()
         {
@@ -27,6 +46,22 @@ namespace DelegatenUndEreignisse
         private decimal Kontostand; // private -> keiner darf von draussen drauf zugreifen
 
         // Property
-        public string Name { get; set; }
+        private string name;
+        public string Name 
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+
+        public byte Alter { get; private set; }
+
+
+
     }
 }

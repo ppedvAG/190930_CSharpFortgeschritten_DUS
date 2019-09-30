@@ -78,19 +78,31 @@ namespace DelegatenUndEreignisse
             Button b1 = new Button();
 
             // Das schreibt WindowsForms für euch beim Doppelklick!!!!
-            b1.KlickLogik = Speichern; // Bei jedem Klick, mach diese Methode !!!
+            b1.KlickLogik += Speichern; // Bei jedem Klick, mach diese Methode !!!
+
+            b1.MachDenKlick();
+            b1.MachDenKlick();
+            //b1.KlickLogik = null; // absolut verboten
 
             b1.MachDenKlick();
             b1.MachDenKlick();
             b1.MachDenKlick();
-            b1.MachDenKlick();
-            b1.MachDenKlick();
+
+            //b1.KlickLogik.Invoke(); // verboten
+            //b1.KlickLogik.Invoke();
 
             // Event
             // Events sind sozusagen das "Property" für Delegaten
 
+            b1.Click += B1_Click;
+
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
+        }
+
+        private static void B1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public static void Speichern()
