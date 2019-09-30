@@ -60,15 +60,25 @@ namespace Generics_Demo
             ////meineTiere = meineHunde; // Geht als List<T> nicht, da die List<T> auch elemente entgegennimmt 
             #endregion
 
+            #region Erklärung Indexer
+            //Dokument doc = new Dokument();
+            //doc.Satz = "Das ist ein langer Satz";
 
-            // Erklärung: Indexer:
-            Dokument doc = new Dokument();
-            doc.Satz = "Das ist ein langer Satz";
+            //// Idee: Gibt mir das erste/zweite/Nte Wort
+            //Console.WriteLine(doc[1]);
+            //doc[2] = "kein";
+            //Console.WriteLine(doc.Satz); 
+            #endregion
 
-            // Idee: Gibt mir das erste/zweite/Nte Wort
-            Console.WriteLine(doc[1]);
-            doc[2] = "kein";
-            Console.WriteLine(doc.Satz);
+            MeineListe<int> demo = new MeineListe<int>();
+
+            demo.Add(12);
+            demo.Add(34);
+            demo.Add(56);
+
+            Console.WriteLine(demo[1]); // "34"
+            demo[1] = 99;
+            Console.WriteLine(demo[1]); // "99"
 
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
