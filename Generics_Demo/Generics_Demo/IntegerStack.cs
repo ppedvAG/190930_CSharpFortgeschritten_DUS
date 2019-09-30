@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace Generics_Demo
 {
-    public class ObjectStack
+    public class IntegerStack
     {
-        public ObjectStack() : this(4) { } // .NET Framework ist 4 -> Default
-        public ObjectStack(int capacity)
+        public IntegerStack() : this(4) { } // .NET Framework ist 4 -> Default
+        public IntegerStack(int capacity)
         {
-            data = new object[capacity];
+            data = new int[capacity];
             index = 0;
         }
 
-        private object[] data;
+        private int[] data;
         private int index;
 
 
-        public void Push(object item)
+        public void Push(int item)
         {
             // Wenn voll: vergrößern:
-            if(data.Length == index)
+            if (data.Length == index)
             {
-                object[] newData = new object[data.Length * 2];
-                Array.Copy(data, newData,data.Length);
+                int[] newData = new int[data.Length * 2];
+                Array.Copy(data, newData, data.Length);
                 data = newData; // Das alte Array wird "irgendwann" vom GC eingesammelt
             }
 
@@ -33,7 +33,7 @@ namespace Generics_Demo
             index++;
         }
 
-        public object Pop()
+        public int Pop()
         {
             if (index == 0)
                 throw new InvalidOperationException("Stack ist bereits leer");
