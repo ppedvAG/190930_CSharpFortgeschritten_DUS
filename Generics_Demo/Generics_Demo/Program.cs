@@ -38,13 +38,23 @@ namespace Generics_Demo
             //// Console.WriteLine(os.Pop()); // Exception wenn der Stack leer ist 
             #endregion
 
-            GenericStack<string> intStack = new GenericStack<string>();
+            //GenericStack<string> intStack = new GenericStack<string>();
 
-            intStack.Push("asdasd");
-            intStack.Pop();
+            //intStack.Push("asdasd");
+            //intStack.Pop();
+
+            MachEtwas("Hallo Welt");
+            MachEtwas(12);
+            MachEtwas(new ObjectStack());
 
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
         }
+
+        public static void MachEtwas<T>(T item) where T : new()
+        {
+            Console.WriteLine($"Ich mache etwas mit: {item}");
+        }
+
     }
 }
