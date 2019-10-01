@@ -80,9 +80,44 @@ namespace Generics_Demo
             demo[1] = 99;
             Console.WriteLine(demo[1]); // "99"
 
+            int z1 = 5;
+            int z2 = 10;
+            int z3 = 15;
+
+            Reihenfolge(z1, z2, z3); // so wie man es "immer" macht
+            Reihenfolge(Zahl1: z1, Zahl2: z2, Zahl3: z3); // benannte Argumente
+            Reihenfolge(Zahl3: z3, Zahl1: z1, Zahl2: z1); // Reihenfolge vertauscht
+
+            // Variante Alt:
+
+            Reihenfolge(z1, Zahl3: z3, Zahl2: z2); // sobald man einmal was bennent -> IMMER bennen
+
+            // Variante Neu:
+            Reihenfolge(z1, Zahl2: 123456, z3);
+            // Will man Vertauschen: alles hinschreiben
+
+
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
         }
+
+        public void UnsafeClosureDemo()
+        {
+            int bitteÄndereMich = 12;
+
+            unsafe
+            {
+                bitteÄndereMich = 99;
+            }
+        }
+
+
+        public static void Reihenfolge(int Zahl1, int Zahl2, int Zahl3)
+        {
+            // ...
+        }
+
+
 
         public static void VerarbeiteDieListe(IEnumerable<Tier> meineListe)
         {
