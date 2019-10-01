@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 namespace SOLID_Taschenrechner
 {
     // 1) Jede Aufgabe (IO/Parsen/Rechnen) bekommt eine eigene Klasse
+    // 2) Dependency-Inversion: Konfiguration der App in "Main()" 
+    //    ----> Schnittstellen erstellen 
 
     class Program
     {
         // Bootstrapping: Initialisierung vom Code
         static void Main(string[] args)
         {
-            new KonsolenUI().Start();
+            IParser parser = new StringSplitParser();
+            IRechner rechner = new SimplerRechner();
+
+            new KonsolenUI(parser,rechner).Start();
         }
     }
 
@@ -30,7 +35,12 @@ namespace SOLID_Taschenrechner
         public int Operand2 { get; set; }
         public string Rechenoperator { get; set; }
     }
-    public class StringSplitParser
+
+    public interface IParser
+    {
+        Formel Parse(string input);
+    }
+    public class StringSplitParser : IParser
     {
         public Formel Parse(string input)
         {
@@ -42,7 +52,12 @@ namespace SOLID_Taschenrechner
             return new Formel(zahl1, zahl2, rechenoperator);
         }
     }
-    public class IFRechner
+
+    public interface IRechner
+    {
+        int Berechne(Formel f);
+    }
+    public class SimplerRechner : IRechner
     {
         public int Berechne(Formel formel)
         {
@@ -57,6 +72,15 @@ namespace SOLID_Taschenrechner
 
     public class KonsolenUI
     {
+        public KonsolenUI(IParser parser, IRechner rechner)
+        {
+            this.parser = parser;
+            this.rechner = rechner;
+        }
+        private IParser parser;
+        private IRechner rechner;
+
+        // Workflow -> Aufruf der Aufgaben in der richtigen Reihenfolge
         public void Start()
         {
             // Ein/Ausgabe
@@ -64,11 +88,9 @@ namespace SOLID_Taschenrechner
             string eingabe = Console.ReadLine(); // "2 + 2"
 
             // Parsen
-            StringSplitParser parser = new StringSplitParser();
             Formel f = parser.Parse(eingabe);
 
             // Rechnen
-            IFRechner rechner = new IFRechner();
             int ergebnis = rechner.Berechne(f);
 
             Console.WriteLine($"Das Ergebnis ist {ergebnis}");
