@@ -35,12 +35,15 @@ namespace Dateisystem_Demo
             //stream.Close(); 
             #endregion
 
-            // Variante 2: Text mit StreamReader/Writer
+            #region Variante 2: Text mit StreamReader/Writer
 
             StreamWriter sw = new StreamWriter("demo.txt");
             sw.Write(textBoxInhalt.Text);
             sw.Close();
+            #endregion
 
+            // Variante 3: File
+            File.WriteAllText("demo.txt", textBoxInhalt.Text);
 
         }
 
@@ -59,11 +62,13 @@ namespace Dateisystem_Demo
             //textBoxInhalt.Text = Encoding.Default.GetString(textdata); 
             #endregion
 
-            // Variante 2: Text mit StreamReader/Writer
+            #region Variante 2: Text mit StreamReader/Writer
+            //StreamReader sr = new StreamReader("demo.txt");
+            //textBoxInhalt.Text = sr.ReadToEnd();
+            //sr.Close(); 
+            #endregion
 
-            StreamReader sr = new StreamReader("demo.txt");
-            textBoxInhalt.Text = sr.ReadToEnd();
-            sr.Close();
+            textBoxInhalt.Text = File.ReadAllText("demo.txt");
         }
 
         private void menuItemBeenden_Click(object sender, RoutedEventArgs e)
