@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,17 +28,31 @@ namespace Dateisystem_Demo
 
         private void menuItemSpeichern_Click(object sender, RoutedEventArgs e)
         {
-
+            // Variante 1: Binär mit FileStream
+            FileStream stream = new FileStream("demo.txt", FileMode.Create);
+            byte[] textData = Encoding.Default.GetBytes(textBoxInhalt.Text);
+            stream.Write(textData, 0, textData.Length);
+            stream.Close();
         }
 
         private void menuItemÖffnen_Click(object sender, RoutedEventArgs e)
         {
+            // Variante 1: Binär mit FileStream
+            FileStream stream = new FileStream("demo.txt", FileMode.Open);
+            byte[] textdata = new byte[stream.Length]; 
+            for (int i = 0; i < stream.Length; i++)
+            {
+                textdata[i] = (byte)stream.ReadByte(); // byte für byte einlesen
+            } 
+            stream.Close();
 
+            MessageBox.Show("Datei erfolgreich eingelesen");
+            textBoxInhalt.Text = Encoding.Default.GetString(textdata);
         }
 
         private void menuItemBeenden_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }
