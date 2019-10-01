@@ -28,26 +28,42 @@ namespace Dateisystem_Demo
 
         private void menuItemSpeichern_Click(object sender, RoutedEventArgs e)
         {
-            // Variante 1: Binär mit FileStream
-            FileStream stream = new FileStream("demo.txt", FileMode.Create);
-            byte[] textData = Encoding.Default.GetBytes(textBoxInhalt.Text);
-            stream.Write(textData, 0, textData.Length);
-            stream.Close();
+            #region Variante 1: Binär mit FileStream
+            //FileStream stream = new FileStream("demo.txt", FileMode.Create);
+            //byte[] textData = Encoding.Default.GetBytes(textBoxInhalt.Text);
+            //stream.Write(textData, 0, textData.Length);
+            //stream.Close(); 
+            #endregion
+
+            // Variante 2: Text mit StreamReader/Writer
+
+            StreamWriter sw = new StreamWriter("demo.txt");
+            sw.Write(textBoxInhalt.Text);
+            sw.Close();
+
+
         }
 
         private void menuItemÖffnen_Click(object sender, RoutedEventArgs e)
         {
-            // Variante 1: Binär mit FileStream
-            FileStream stream = new FileStream("demo.txt", FileMode.Open);
-            byte[] textdata = new byte[stream.Length]; 
-            for (int i = 0; i < stream.Length; i++)
-            {
-                textdata[i] = (byte)stream.ReadByte(); // byte für byte einlesen
-            } 
-            stream.Close();
+            #region Variante 1: Binär mit FileStream
+            //FileStream stream = new FileStream("demo.txt", FileMode.Open);
+            //byte[] textdata = new byte[stream.Length]; 
+            //for (int i = 0; i < stream.Length; i++)
+            //{
+            //    textdata[i] = (byte)stream.ReadByte(); // byte für byte einlesen
+            //} 
+            //stream.Close();
 
-            MessageBox.Show("Datei erfolgreich eingelesen");
-            textBoxInhalt.Text = Encoding.Default.GetString(textdata);
+            //MessageBox.Show("Datei erfolgreich eingelesen");
+            //textBoxInhalt.Text = Encoding.Default.GetString(textdata); 
+            #endregion
+
+            // Variante 2: Text mit StreamReader/Writer
+
+            StreamReader sr = new StreamReader("demo.txt");
+            textBoxInhalt.Text = sr.ReadToEnd();
+            sr.Close();
         }
 
         private void menuItemBeenden_Click(object sender, RoutedEventArgs e)
