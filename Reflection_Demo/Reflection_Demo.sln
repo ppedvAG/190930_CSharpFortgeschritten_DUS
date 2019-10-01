@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection_Demo", "Reflection_Demo\Reflection_Demo.csproj", "{4C8B6124-4570-48AD-965A-650FB0F5C3B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeineDLL", "MeineDLL\MeineDLL.csproj", "{BFAEDC0C-4A19-4D6A-9ACB-FED10C2FE22C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpDLL", "TrumpDLL\TrumpDLL.csproj", "{3C77B0D2-A9E7-412D-A87F-083F8F9AFAB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{4C8B6124-4570-48AD-965A-650FB0F5C3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C8B6124-4570-48AD-965A-650FB0F5C3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C8B6124-4570-48AD-965A-650FB0F5C3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFAEDC0C-4A19-4D6A-9ACB-FED10C2FE22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFAEDC0C-4A19-4D6A-9ACB-FED10C2FE22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFAEDC0C-4A19-4D6A-9ACB-FED10C2FE22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFAEDC0C-4A19-4D6A-9ACB-FED10C2FE22C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C77B0D2-A9E7-412D-A87F-083F8F9AFAB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C77B0D2-A9E7-412D-A87F-083F8F9AFAB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C77B0D2-A9E7-412D-A87F-083F8F9AFAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C77B0D2-A9E7-412D-A87F-083F8F9AFAB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
