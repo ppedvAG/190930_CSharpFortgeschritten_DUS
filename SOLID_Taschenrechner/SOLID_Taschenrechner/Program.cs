@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SOLID_Taschenrechner
@@ -15,10 +16,10 @@ namespace SOLID_Taschenrechner
         // Bootstrapping: Initialisierung vom Code
         static void Main(string[] args)
         {
-            IParser parser = new StringSplitParser();
+            IParser parser = new ValidateParser();
             IRechner rechner = new SimplerRechner();
 
-            new KonsolenUI(parser,rechner).Start();
+            new KonsolenUI(parser, rechner).Start();
         }
     }
 
@@ -52,6 +53,51 @@ namespace SOLID_Taschenrechner
             return new Formel(zahl1, zahl2, rechenoperator);
         }
     }
+    public class RegexParser : IParser
+    {
+        public Formel Parse(string input)
+        {
+            Regex r = new Regex(@"(\d+)\s*(\D+)\s*(\d+)");
+            var match = r.Match(input);
+
+            if (match.Success)
+            {
+                int zahl1 = Convert.ToInt32(match.Groups[1].Value);
+                int zahl2 = Convert.ToInt32(match.Groups[3].Value);
+                string rechenoperator = match.Groups[2].Value;
+
+                return new Formel(zahl1, zahl2, rechenoperator);
+            }
+            else
+                throw new FormatException("Die eingegebene Formel war im falschen Format");
+        }
+    }
+    public class ValidateParser : IParser
+    {
+
+        public Formel Parse(string input)
+        {
+            IParser parser = new StringSplitParser();
+            try // Versuch 1
+            {
+                return parser.Parse(input);
+            }
+            catch (Exception)
+            {
+                parser = new RegexParser();
+            }
+
+            try // Versuch 2
+            {
+                return parser.Parse(input);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Alle Parser fehlgeschlagen !");
+            }
+        }
+    }
+
 
     public interface IRechner
     {
