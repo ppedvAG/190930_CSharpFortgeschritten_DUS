@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEF_Demo", "MEF_Demo\MEF_Demo.csproj", "{6AD96FE5-B5B9-47A8-B996-6CE1AD7A93B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{538FC438-E77A-473C-85FC-C8A2E433D2B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taschenrechner", "Taschenrechner\Taschenrechner.csproj", "{89C2AEAF-4C87-418A-89A0-4A4374BDCA4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpTaschenrechner", "TrumpTaschenrechner\TrumpTaschenrechner.csproj", "{EDD210B8-CECE-4F51-805A-F7858C03BD94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{6AD96FE5-B5B9-47A8-B996-6CE1AD7A93B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD96FE5-B5B9-47A8-B996-6CE1AD7A93B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AD96FE5-B5B9-47A8-B996-6CE1AD7A93B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538FC438-E77A-473C-85FC-C8A2E433D2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538FC438-E77A-473C-85FC-C8A2E433D2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538FC438-E77A-473C-85FC-C8A2E433D2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538FC438-E77A-473C-85FC-C8A2E433D2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C2AEAF-4C87-418A-89A0-4A4374BDCA4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C2AEAF-4C87-418A-89A0-4A4374BDCA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C2AEAF-4C87-418A-89A0-4A4374BDCA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C2AEAF-4C87-418A-89A0-4A4374BDCA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD210B8-CECE-4F51-805A-F7858C03BD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD210B8-CECE-4F51-805A-F7858C03BD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD210B8-CECE-4F51-805A-F7858C03BD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD210B8-CECE-4F51-805A-F7858C03BD94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
