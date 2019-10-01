@@ -14,13 +14,23 @@ namespace Serialisierung_Demo
     {
         static void Main(string[] args)
         {
-            Person p1 = new Person
+            //Person p1 = new Person
+            //{
+            //    Vorname = "Tom",
+            //    Nachname = "Ate",
+            //    Alter = 10,
+            //    Kontostand = 100
+            //};
+
+            List<Person> personen = new List<Person>
             {
-                Vorname = "Tom",
-                Nachname = "Ate",
-                Alter = 10,
-                Kontostand = 100
+                new Person{Vorname="Tom",Nachname="Ate",Alter=10,Kontostand=100},
+                new Person{Vorname="Anna",Nachname="Nass",Alter=20,Kontostand=200},
+                new Person{Vorname="Peter",Nachname="Silie",Alter=30,Kontostand=300},
+                new Person{Vorname="Franz",Nachname="Ose",Alter=40,Kontostand=400},
+                new Person{Vorname="Martha",Nachname="Pfahl",Alter=50,Kontostand=-500},
             };
+
 
             #region Binär
             //BinaryFormatter formatter = new BinaryFormatter();
@@ -58,15 +68,15 @@ namespace Serialisierung_Demo
             // JSON
             // -> NuGet: Newtonsoft.JSON
 
-            string json = JsonConvert.SerializeObject(p1);
+            string json = JsonConvert.SerializeObject(personen);
 
             Console.WriteLine(json);
 
             // Deserialisieren:
-            Person geladenePerson = JsonConvert.DeserializeObject<Person>(json);
+            Person[] geladenePerson = JsonConvert.DeserializeObject<Person[]>(json);
 
-            Console.WriteLine(geladenePerson.Vorname);
-            Console.WriteLine(geladenePerson.Nachname);
+            Console.WriteLine(geladenePerson[0].Vorname);
+            Console.WriteLine(geladenePerson[0].Nachname);
 
             Console.WriteLine("---Anfang---");
             Console.ReadKey();
