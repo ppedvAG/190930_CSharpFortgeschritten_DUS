@@ -44,7 +44,6 @@ namespace Dateisystem_Demo
 
             // Variante 3: File
             File.WriteAllText("demo.txt", textBoxInhalt.Text);
-
         }
 
         private void menuItemÖffnen_Click(object sender, RoutedEventArgs e)
