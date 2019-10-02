@@ -34,11 +34,24 @@ namespace Thread_Demo
             //t2.Join();
             #endregion
 
+            #region Threadpool und Einstellungen
+            //ThreadPool.QueueUserWorkItem(MachEtwasInEinemThread,12);
+            //ThreadPool.QueueUserWorkItem(MachEtwasInEinemThread2,99);
+
+            //// Einstellmöglichkeiten für Threads
+            //Thread t1 = new Thread(MachEtwasInEinemThread);
+            //t1.IsBackground = true;
+            //t1.Priority = ThreadPriority.Normal;
+
+            //t1.Start(42); 
+            #endregion
+
+
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
         }
 
-        static void MachEtwasInEinemThread()
+        static void MachEtwasInEinemThread(object state)
         {
             for (int i = 0; i < 1000; i++)
             {
@@ -46,7 +59,7 @@ namespace Thread_Demo
                 Console.Write("*");
             }
         }
-        static void MachEtwasInEinemThread2()
+        static void MachEtwasInEinemThread2(object state)
         {
             for (int i = 0; i < 1000; i++)
             {
