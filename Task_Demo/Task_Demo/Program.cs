@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -53,41 +54,72 @@ namespace Task_Demo
             //cts.Cancel(); // ich möchte canceln :) 
             #endregion
 
-            try
-            {
-                Task t1 = Task.Run(Fehler1);
-                Task t2 = Task.Run(Fehler2);
-                Task t3 = Task.Run(Fehler3);
+            #region Exceptions im Task
+            //try
+            //{
+            //    Task t1 = Task.Run(Fehler1);
+            //    Task t2 = Task.Run(Fehler2);
+            //    Task t3 = Task.Run(Fehler3);
 
-                // lösung: Warten oder Result abfragen
-                Task.WaitAll(t1, t2, t3);
-            }
-            catch (AggregateException ex) // AggregateException ist der Standard-Task Fehler
+            //    // lösung: Warten oder Result abfragen
+            //    Task.WaitAll(t1, t2, t3);
+            //}
+            //catch (AggregateException ex) // AggregateException ist der Standard-Task Fehler
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    Console.WriteLine("Und zwar:");
+            //    foreach (var item in ex.InnerExceptions)
+            //    {
+            //        switch (item)
+            //        {
+            //            case DivideByZeroException e1:
+            //                Console.WriteLine("Dividier nicht durch null, du depp !");
+            //                break;
+            //            case FormatException e2:
+            //                Console.WriteLine("Gib was ordentliches ein, du depp !");
+            //                break;
+            //            //case StackOverflowException e2:
+            //            //    Console.WriteLine("Wie hast du das überhaupt geschafft?, du depp !");
+            //            //    break;
+            //            default:
+            //                Console.WriteLine("Fehler kenne ich nicht mal, was könnte es sein ... ....");
+            //                Console.WriteLine(item.Message);
+            //                Console.WriteLine(item.StackTrace);
+            //                Console.WriteLine(item.Source);
+            //                break;
+            //        }
+            //    }
+            //} 
+            #endregion
+
+            // normale For-Schleife:
+            Stopwatch watch = new Stopwatch();
+
+            double[] erg = new double[10_000_000];
+
+            watch.Start();
+            for (int i = 0; i < 10_000_000; i++)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Und zwar:");
-                foreach (var item in ex.InnerExceptions)
-                {
-                    switch (item)
-                    {
-                        case DivideByZeroException e1:
-                            Console.WriteLine("Dividier nicht durch null, du depp !");
-                            break;
-                        case FormatException e2:
-                            Console.WriteLine("Gib was ordentliches ein, du depp !");
-                            break;
-                        //case StackOverflowException e2:
-                        //    Console.WriteLine("Wie hast du das überhaupt geschafft?, du depp !");
-                        //    break;
-                        default:
-                            Console.WriteLine("Fehler kenne ich nicht mal, was könnte es sein ... ....");
-                            Console.WriteLine(item.Message);
-                            Console.WriteLine(item.StackTrace);
-                            Console.WriteLine(item.Source);
-                            break;
-                    }
-                }
+                // irgendeine berechnung die lange dauert ...
+                erg[i] = Math.Log10(Math.Pow((Math.Sqrt(i) * Math.Cos(i * 2) +  Math.PI), i) * Math.Sqrt(Math.PI * Math.Acos(i)) / Math.Exp(i)); // Irgendeine Berechnung damit der Prozessor was zum Arbeiten hat ;)
             }
+            watch.Stop();
+
+            Console.WriteLine($"For-Schleife normal: {watch.ElapsedMilliseconds}ms");
+
+            // Parallel.For
+
+            double[] erg2 = new double[10_000_000];
+
+            watch.Restart();
+            //Parallel.For(0, 10_000_000, i =>
+            Parallel.For(0, 10_000_000,new ParallelOptions { MaxDegreeOfParallelism = 2 }, i =>
+            {
+                 erg2[i] = Math.Log10(Math.Pow((Math.Sqrt(i) * Math.Cos(i * 2) + Math.PI), i) * Math.Sqrt(Math.PI * Math.Acos(i)) / Math.Exp(i)); // Irgendeine Berechnung damit der Prozessor was zum Arbeiten hat ;)
+             });
+            watch.Stop();
+
+            Console.WriteLine($"Parallel.For: {watch.ElapsedMilliseconds}ms");
 
             Console.WriteLine("---ANFANG---");
             Console.ReadKey();
