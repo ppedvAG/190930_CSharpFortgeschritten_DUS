@@ -46,14 +46,64 @@ namespace Thread_Demo
             //t1.Start(42); 
             #endregion
 
-            Console.OutputEncoding = Encoding.Unicode;
+            #region Monitor
+            //Console.OutputEncoding = Encoding.Unicode;
 
-            Konto meinKonto = new Konto();
+            //Konto meinKonto = new Konto();
 
-            for (int i = 0; i < 100; i++)
-            {
-                ThreadPool.QueueUserWorkItem(ZufälligesKontoupdate, meinKonto);
-            }
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    ThreadPool.QueueUserWorkItem(ZufälligesKontoupdate, meinKonto);
+            //} 
+            #endregion
+
+            #region Mutex
+            //Mutex mutex = new Mutex(false, "MeinMutex");
+
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    mutex.WaitOne();
+            //    // hier darf wieder nur einer rein
+            //    Thread.Sleep(100);
+            //    Console.WriteLine(i);
+
+            //    mutex.ReleaseMutex();
+            //} 
+            #endregion
+
+            #region Mit Mutex verhindern, dass die App mehrfach geöffnet wird
+            //Mutex mutex = new Mutex(false, "MeinMutex");
+
+            //var offen = mutex.WaitOne(100,false);
+
+            //if(offen)
+            //{
+            //    // logik
+            //    for (int i = 0; i < 1000; i++)
+            //    {
+            //        Console.Write("#");
+            //        Thread.Sleep(100);
+            //    }
+            //}
+            //else
+            //{
+            //    // beenden
+            //    Console.WriteLine("Applikation ist bereits offen, beendet sich selbst in 5 sec");
+            //    Thread.Sleep(5000);
+            //    return;
+            //}
+            //mutex.ReleaseMutex(); 
+            #endregion
+
+            #region Semaphore
+            //SemaphoreZähler sz = new SemaphoreZähler();
+
+            //for (int i = 0; i < 500; i++)
+            //{
+            //    Thread t1 = new Thread(sz.MachWas);
+            //    t1.Start();
+            //} 
+            #endregion
 
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
