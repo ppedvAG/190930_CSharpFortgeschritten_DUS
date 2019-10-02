@@ -26,13 +26,39 @@ namespace AsyncAwait_Demo
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Start");
+            //MessageBox.Show("Start");
 
-            Task t1 = Task.Run(FülleProgressbar);
+            // await Task.Run(FülleProgressbar);
 
-            MessageBox.Show("Ende");
+            #region await mit Resultat:
+            //string uhrzeit = await Task<string>.Run(() =>
+            //{
+            //    Thread.Sleep(5000);
+            //    return DateTime.Now.ToLongTimeString();
+            //});
+            //MessageBox.Show("Uhrzeit:" + uhrzeit); 
+            #endregion
+
+            // Warten selbst:
+            // Thread.Sleep(5000);      // blockiert den UI-Thread
+            // await Task.Delay(5000);  // blockiert NICHT !
+
+            #region ConfigureAwait
+            //textBoxInhalt.Text = "Vor dem Task";
+
+            //await Task.Run(FülleProgressbar).ConfigureAwait(false);
+            //// Normalfall: nach dem await wird zurück in den UI-Thread gewechselt
+            //// ConfigureAwait(false): nach dem await wird mit dem Thread vom Task weitergemacht (= performance da der Thread nicht "gewechselt" werden muss)
+
+            //textBoxInhalt.Text = "Nach dem Task"; 
+            #endregion
+
+            //MessageBox.Show("Ende");
+
+            ProgressWindow w = new ProgressWindow();
+            w.ShowDialog();
         }
 
         public void FülleProgressbar()
@@ -42,6 +68,7 @@ namespace AsyncAwait_Demo
                 Thread.Sleep(100);
                 Dispatcher.Invoke(() => progressBarWert.Value = i); // "Oberflächenthread -> Bitte mach das für mich
             }
+            Close();
         }
     }
 }
