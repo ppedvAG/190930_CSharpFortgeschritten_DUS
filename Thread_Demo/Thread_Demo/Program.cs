@@ -46,10 +46,33 @@ namespace Thread_Demo
             //t1.Start(42); 
             #endregion
 
+            Console.OutputEncoding = Encoding.Unicode;
+
+            Konto meinKonto = new Konto();
+
+            for (int i = 0; i < 100; i++)
+            {
+                ThreadPool.QueueUserWorkItem(ZufälligesKontoupdate, meinKonto);
+            }
 
             Console.WriteLine("---ENDE---");
             Console.ReadKey();
         }
+
+        public static void ZufälligesKontoupdate(object state) // <-- für Threadpool
+        {
+            Konto meinKonto = (Konto)state;
+            Random generator = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                int betrag = generator.Next(1, 100);
+                if (generator.Next(0, 2) % 2 == 0) // gerade zahl
+                    meinKonto.Einzahlen(betrag);
+                else
+                    meinKonto.Abheben(betrag);
+            }
+        }
+
 
         static void MachEtwasInEinemThread(object state)
         {
