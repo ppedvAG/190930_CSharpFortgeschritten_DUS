@@ -112,14 +112,21 @@ namespace Task_Demo
             double[] erg2 = new double[10_000_000];
 
             watch.Restart();
-            //Parallel.For(0, 10_000_000, i =>
-            Parallel.For(0, 10_000_000,new ParallelOptions { MaxDegreeOfParallelism = 2 }, i =>
+            Parallel.For(0, 10_000_000, i =>
+            //Parallel.For(0, 10_000_000,new ParallelOptions { MaxDegreeOfParallelism = 2 }, i =>
             {
                  erg2[i] = Math.Log10(Math.Pow((Math.Sqrt(i) * Math.Cos(i * 2) + Math.PI), i) * Math.Sqrt(Math.PI * Math.Acos(i)) / Math.Exp(i)); // Irgendeine Berechnung damit der Prozessor was zum Arbeiten hat ;)
-             });
+            });
             watch.Stop();
 
             Console.WriteLine($"Parallel.For: {watch.ElapsedMilliseconds}ms");
+
+            // --------------------------
+
+            //Parallel.ForEach(erg2, item =>
+            //{
+            //    Console.WriteLine(item);
+            //});
 
             Console.WriteLine("---ANFANG---");
             Console.ReadKey();
