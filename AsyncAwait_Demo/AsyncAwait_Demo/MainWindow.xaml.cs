@@ -30,13 +30,18 @@ namespace AsyncAwait_Demo
         {
             MessageBox.Show("Start");
 
+            Task t1 = Task.Run(FülleProgressbar);
+
+            MessageBox.Show("Ende");
+        }
+
+        public void FülleProgressbar()
+        {
             for (int i = 0; i <= 100; i++)
             {
                 Thread.Sleep(100);
-                progressBarWert.Value = i;
+                Dispatcher.Invoke(() => progressBarWert.Value = i); // "Oberflächenthread -> Bitte mach das für mich
             }
-
-            MessageBox.Show("Ende");
         }
     }
 }
