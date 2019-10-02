@@ -9,6 +9,7 @@ namespace Task_Demo
 {
     class Program
     {
+        static CancellationTokenSource cts = new CancellationTokenSource();
         static void Main(string[] args)
         {
             #region Tasks erstellen
@@ -43,9 +44,82 @@ namespace Task_Demo
             //t2.ContinueWith(MachWas4); // Wenn Task2 fertig ist, geht ein neuer Task mit MachWas4 los  
             #endregion
 
+            #region Tasks beenden/abbrechen
+            //Task t1 = Task.Run(SehrLangeAufgabe);
+
+            //// nach 5 sek möchte ich abbrechen:
+            //Thread.Sleep(5000);
+
+            //cts.Cancel(); // ich möchte canceln :) 
+            #endregion
+
+            try
+            {
+                Task t1 = Task.Run(Fehler1);
+                Task t2 = Task.Run(Fehler2);
+                Task t3 = Task.Run(Fehler3);
+
+                // lösung: Warten oder Result abfragen
+                Task.WaitAll(t1, t2, t3);
+            }
+            catch (AggregateException ex) // AggregateException ist der Standard-Task Fehler
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Und zwar:");
+                foreach (var item in ex.InnerExceptions)
+                {
+                    switch (item)
+                    {
+                        case DivideByZeroException e1:
+                            Console.WriteLine("Dividier nicht durch null, du depp !");
+                            break;
+                        case FormatException e2:
+                            Console.WriteLine("Gib was ordentliches ein, du depp !");
+                            break;
+                        //case StackOverflowException e2:
+                        //    Console.WriteLine("Wie hast du das überhaupt geschafft?, du depp !");
+                        //    break;
+                        default:
+                            Console.WriteLine("Fehler kenne ich nicht mal, was könnte es sein ... ....");
+                            Console.WriteLine(item.Message);
+                            Console.WriteLine(item.StackTrace);
+                            Console.WriteLine(item.Source);
+                            break;
+                    }
+                }
+            }
 
             Console.WriteLine("---ANFANG---");
             Console.ReadKey();
+        }
+
+        public static void Fehler1()
+        {
+            Thread.Sleep(2000);
+            int zero = 0;
+            int demo = 5 / zero;
+        }
+        public static void Fehler2()
+        {
+            Thread.Sleep(5000);
+            throw new StackOverflowException();
+        }
+        public static void Fehler3()
+        {
+            Thread.Sleep(8000);
+            throw new FormatException();
+        }
+
+        public static void SehrLangeAufgabe()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                Thread.Sleep(50);
+                if (cts.IsCancellationRequested) // Wenn Main() sagt, dass wir canceln solln
+                    break; // schleife beenden
+
+                Console.Write("#");
+            }
         }
 
         public static void MachWas1()
