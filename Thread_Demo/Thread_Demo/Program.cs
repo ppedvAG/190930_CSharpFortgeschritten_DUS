@@ -96,13 +96,13 @@ namespace Thread_Demo
             #endregion
 
             #region Semaphore
-            //SemaphoreZähler sz = new SemaphoreZähler();
+            SemaphoreZähler sz = new SemaphoreZähler();
 
-            //for (int i = 0; i < 500; i++)
-            //{
-            //    Thread t1 = new Thread(sz.MachWas);
-            //    t1.Start();
-            //} 
+            for (int i = 0; i < 500; i++)
+            {
+                Thread t1 = new Thread(sz.MachWas);
+                t1.Start();
+            }
             #endregion
 
             Console.WriteLine("---ENDE---");

@@ -9,15 +9,17 @@ namespace Thread_Demo
 {
     class SemaphoreZähler
     {
-        public int Zähler { get; set; }
+        public int Zähler = 0;
         private Semaphore semaphore = new Semaphore(3,3); // Maximal 3
 
         public void MachWas()
         {
             semaphore.WaitOne();
-            Zähler++;
+            //Zähler++;
+            Interlocked.Increment(ref Zähler);
             Console.WriteLine(Zähler);
-            Zähler--;
+            //Zähler--;
+            Interlocked.Decrement(ref Zähler);
             semaphore.Release();
         }
     }
